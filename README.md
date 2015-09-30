@@ -6,6 +6,7 @@ Currently supported distros are recent versions of:
 - Debian based distros: Tested with debian and ubuntu
 - RedHat based distros: Tested with Fedora, RHEL, CentOS, Amazon
 - Suse based distros: Tested with Suse, openSuse
+- Archlinux based distros: Tested with Arch and Antergos
 - FreeBSD
 
 ansible/enable.yml
