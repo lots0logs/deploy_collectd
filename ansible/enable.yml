@@ -19,7 +19,7 @@
 
     - name: Check support for OS family
       fail: msg="Distro {{ ansible_distribution }} not supported, please open a support ticket in https://github.com/mistio/deploy_collectd"
-      when: ansible_os_family not in ['Debian', 'RedHat', 'Suse', 'FreeBSD']
+      when: ansible_os_family not in ['Debian', 'RedHat', 'Suse', 'FreeBSD', 'Archlinux']
 
     - name: Group servers per OS to apply OS specific steps
       group_by: key={{ ansible_distribution }}
@@ -243,6 +243,21 @@
 
     - name: Install collectd with portmaster
       shell: "portmaster -G -w --no-confirm -y -d -mBATCH=yes < /dev/null /usr/ports/net-mgmt/collectd5"
+
+
+- name: Install CollectD for Archlinux
+  hosts: Archlinux
+  vars:
+    ansible_python_interpreter: /usr/bin/python2
+  gather_facts: no
+  sudo: yes
+  tasks:
+    - name: Install collectd
+      pacman:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - collectd
 
 
 - name: Configure and start collectd
